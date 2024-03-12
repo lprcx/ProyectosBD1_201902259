@@ -1,0 +1,99 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2A354C11-4D34-C00E-3A0F-841820EA89B1" name="PRODUCTO_ORDEN">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-12 05:09:16 UTC</createdTime>
+<generatorID>9BD18870-5BB3-A0D7-CE79-65478383CBE8</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_orden" id="9F1357A3-B7DA-EFF9-E5A7-093C2CD25C45">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-12 05:09:16 UTC</createdTime>
+<generatorID>AF640B39-A710-9212-571D-7A5745EA8B62</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_producto" id="DC63D5A4-CD4C-77C1-8557-C0253AA278F9">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-12 05:09:16 UTC</createdTime>
+<generatorID>8EEF561F-5D11-01F7-D0BF-EAD188D2E1AD</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cantidad" id="33A7AB45-EAC4-A605-491C-5494D721B2AA">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-12 05:09:16 UTC</createdTime>
+<generatorID>C43B0451-4BE6-A01B-274C-7E6028587D61</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ORDEN_id_orden" id="8FB5CF06-9A0D-C416-A48B-91A7010AB055">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-12 05:09:16 UTC</createdTime>
+<generatorID>81494144-F662-01C3-B148-9C8AC74DE4D0</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F52F23B1-0604-7208-D793-0905804DB259" referredColumn="B4666CD1-3152-4001-9560-C42906192790"/>
+</associations>
+</Column>
+<Column name="PRODUCTO_id_producto" id="FEE019E1-DD47-A60E-551F-99B86291E94F">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-12 05:09:16 UTC</createdTime>
+<generatorID>4B5647AC-BD44-7EB6-BC9E-29751E822CF8</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0AD1C5E4-06E7-EE7F-57A3-48D9728DC629" referredColumn="CFE58B95-0C4A-3D52-978B-9EBA5AE5A05A"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="F9BD5C08-6F75-6A2B-FCDC-8D576CCECFD5" name="PRODUCTO_ORDEN_ORDEN_FK">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-12 05:09:16 UTC</createdTime>
+<generatorID>9B3AECD1-70E9-54BD-D96A-5E3B77F0759C</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8FB5CF06-9A0D-C416-A48B-91A7010AB055"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C9192BA3-AA8A-8ADE-158F-D319CE14E37C" name="PRODUCTO_ORDEN_PRODUCTO_FK">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-12 05:09:16 UTC</createdTime>
+<generatorID>E0270CC3-77D1-851A-C2A4-34C0CB840FA3</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FEE019E1-DD47-A60E-551F-99B86291E94F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

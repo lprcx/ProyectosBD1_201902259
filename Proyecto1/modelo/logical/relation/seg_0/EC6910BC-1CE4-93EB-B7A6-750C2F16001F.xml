@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="PAISCL" directorySegmentName="seg_0" id="EC6910BC-1CE4-93EB-B7A6-750C2F16001F">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-12 04:27:14 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<sourcePk>D866DCDE-F8DC-05DD-E643-18E0B19B62BA</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>414C0676-7B07-D76C-4938-E428683D2937</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>9C7015EB-7B34-F8BB-86E7-BD862CBE20F6</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
