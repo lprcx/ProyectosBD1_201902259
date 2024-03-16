@@ -2,17 +2,17 @@
 CREATE DATABASE IF NOT EXISTS empr;
 
 ---- TABLAS TEMPORALES
-CREATE TEMPORARY TABLE categoria (
+CREATE TEMPORARY TABLE CATEGORIA (
     id_categoria INT NOT NULL,
     nombre       VARCHAR(100) NOT NULL
 );
 
-CREATE TEMPORARY TABLE pais (
+CREATE TEMPORARY TABLE PAIS (
     id_pais INT NOT NULL,
     nombre  VARCHAR(100) NOT NULL
 );
 
-CREATE TEMPORARY TABLE cliente (
+CREATE TEMPORARY TABLE CLIENTE (
     id_cliente   INT NOT NULL,
     nombre       VARCHAR(100) NOT NULL,
     apellido     VARCHAR(100) NOT NULL,
@@ -25,20 +25,20 @@ CREATE TEMPORARY TABLE cliente (
     id_pais      INT NOT NULL
 );
 
-CREATE TEMPORARY TABLE producto (
+CREATE TEMPORARY TABLE PRODUCTO (
     id_producto            INT NOT NULL,
     nombre                 VARCHAR(100) NOT NULL,
     precio                 INT NOT NULL,
     id_categoria           INT NOT NULL
 );
 
-CREATE TEMPORARY TABLE vendedor (
+CREATE TEMPORARY TABLE VENDEDOR (
     id_vendedor  INT NOT NULL,
     nombre       VARCHAR(200) NOT NULL,
     id_pais      INT NOT NULL
 );
 
-CREATE TEMPORARY TABLE orden (
+CREATE TEMPORARY TABLE ORDEN (
     id_orden             INT NOT NULL,
     linea_orden          INT NOT NULL,
     fecha                DATE NOT NULL,
@@ -46,7 +46,7 @@ CREATE TEMPORARY TABLE orden (
     id_vendedor          INT NOT NULL
 );
 
-CREATE TEMPORARY TABLE producto_orden (
+CREATE TEMPORARY TABLE PRODUCTO_ORDEN (
     id_orden             INT NOT NULL,
     id_producto          INT NOT NULL,
     cantidad             INT NOT NULL
@@ -54,19 +54,19 @@ CREATE TEMPORARY TABLE producto_orden (
 
 
 ------ MODELO DE DATOS ---------
-CREATE TABLE categoria (
+CREATE TABLE CATEGORIA (
     id_categoria INT NOT NULL,
     nombre       VARCHAR(100) NOT NULL,
     PRIMARY KEY (id_categoria)
 );
 
-CREATE TABLE pais (
+CREATE TABLE PAIS (
     id_pais INT NOT NULL,
     nombre  VARCHAR(100) NOT NULL,
     PRIMARY KEY (id_pais)
 );
 
-CREATE TABLE cliente (
+CREATE TABLE CLIENTE (
     id_cliente   INT NOT NULL,
     nombre       VARCHAR(100) NOT NULL,
     apellido     VARCHAR(100) NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE cliente (
     FOREIGN KEY (id_pais) REFERENCES pais(id_pais)
 );
 
-CREATE TABLE producto (
+CREATE TABLE PRODUCTO (
     id_producto            INT NOT NULL,
     nombre                 VARCHAR(100) NOT NULL,
     precio                 INT NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE producto (
     FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
 );
 
-CREATE TABLE vendedor (
+CREATE TABLE VENDEDOR (
     id_vendedor  INT NOT NULL,
     nombre       VARCHAR(200) NOT NULL,
     id_pais      INT NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE vendedor (
     FOREIGN KEY (id_pais) REFERENCES pais(id_pais)
 );
 
-CREATE TABLE orden (
+CREATE TABLE ORDEN (
     id_orden             INT NOT NULL,
     linea_orden          INT NOT NULL,
     fecha                DATE NOT NULL,
@@ -109,7 +109,7 @@ CREATE TABLE orden (
     FOREIGN KEY (id_vendedor) REFERENCES vendedor(id_vendedor)
 );
 
-CREATE TABLE producto_orden (
+CREATE TABLE PRODUCTO_ORDEN (
     id_orden             INT NOT NULL,
     id_producto          INT NOT NULL,
     cantidad             INT NOT NULL,
