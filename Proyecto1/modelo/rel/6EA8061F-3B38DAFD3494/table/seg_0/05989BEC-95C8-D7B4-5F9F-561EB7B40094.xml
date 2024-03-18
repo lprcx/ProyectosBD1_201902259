@@ -111,17 +111,6 @@
 <ownDataTypeParameters>1 CHAR,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="id_pais" id="F11B12E2-E7FA-2720-8600-F286562AF924">
-<createdBy>Patty Reyes</createdBy>
-<createdTime>2024-03-12 05:09:16 UTC</createdTime>
-<generatorID>FBFAF1E1-3A67-E603-FF1C-FBF7D821EFB5</generatorID>
-<ownerDesignName>modelo</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 <Column name="PAIS_id_pais" id="98975E27-05FB-6F0F-8D7C-3F5B05D856EF">
 <createdBy>Patty Reyes</createdBy>
 <createdTime>2024-03-12 05:09:16 UTC</createdTime>

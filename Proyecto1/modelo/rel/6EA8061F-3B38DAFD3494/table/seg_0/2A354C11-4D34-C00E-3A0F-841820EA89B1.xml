@@ -8,28 +8,6 @@
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="id_orden" id="9F1357A3-B7DA-EFF9-E5A7-093C2CD25C45">
-<createdBy>Patty Reyes</createdBy>
-<createdTime>2024-03-12 05:09:16 UTC</createdTime>
-<generatorID>AF640B39-A710-9212-571D-7A5745EA8B62</generatorID>
-<ownerDesignName>modelo</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="id_producto" id="DC63D5A4-CD4C-77C1-8557-C0253AA278F9">
-<createdBy>Patty Reyes</createdBy>
-<createdTime>2024-03-12 05:09:16 UTC</createdTime>
-<generatorID>8EEF561F-5D11-01F7-D0BF-EAD188D2E1AD</generatorID>
-<ownerDesignName>modelo</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 <Column name="cantidad" id="33A7AB45-EAC4-A605-491C-5494D721B2AA">
 <createdBy>Patty Reyes</createdBy>
 <createdTime>2024-03-12 05:09:16 UTC</createdTime>

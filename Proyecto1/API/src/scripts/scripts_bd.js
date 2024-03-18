@@ -26,7 +26,7 @@ CREATE TEMPORARY TABLE temp_cliente (
 CREATE TEMPORARY TABLE temp_producto (
     id_producto            INT,
     nombre                 VARCHAR(100),
-    precio                 FLOAT,
+    precio                 DECIMAL(5,2),
     id_categoria           INT 
 );
 
@@ -83,7 +83,7 @@ CREATE TABLE empr.CLIENTE (
 CREATE TABLE empr.PRODUCTO (
     id_producto            INT NOT NULL,
     nombre                 VARCHAR(100) NOT NULL,
-    precio                 FLOAT NOT NULL,
+    precio                 DECIMAL(5,2) NOT NULL,
     id_categoria           INT NOT NULL,
     PRIMARY KEY (id_producto),
     FOREIGN KEY (id_categoria) REFERENCES empr.CATEGORIA(id_categoria)

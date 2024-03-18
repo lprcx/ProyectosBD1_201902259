@@ -41,28 +41,6 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="id_cliente" id="D101DAC1-7A55-BEE0-ACBB-E2983788719B">
-<createdBy>Patty Reyes</createdBy>
-<createdTime>2024-03-12 05:09:16 UTC</createdTime>
-<generatorID>A5F0B96E-CC74-A7F5-D2AB-C64DB3577310</generatorID>
-<ownerDesignName>modelo</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="id_vendedor" id="1A0BDE56-10E5-C847-CC72-8DEADD18145F">
-<createdBy>Patty Reyes</createdBy>
-<createdTime>2024-03-12 05:09:16 UTC</createdTime>
-<generatorID>D5CC5C76-3577-4DBF-5067-650DCEEBA9C8</generatorID>
-<ownerDesignName>modelo</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 <Column name="CLIENTE_id_cliente" id="8060F43F-CC29-2FA7-88EB-1AE6D9FE269B">
 <createdBy>Patty Reyes</createdBy>
 <createdTime>2024-03-12 05:09:16 UTC</createdTime>

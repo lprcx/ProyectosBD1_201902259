@@ -42,17 +42,6 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="id_categoría" id="360F8419-C265-227A-2009-7120120FD3DE">
-<createdBy>Patty Reyes</createdBy>
-<createdTime>2024-03-12 05:09:16 UTC</createdTime>
-<generatorID>550A0796-805C-A4FA-A699-DC263A258DA5</generatorID>
-<ownerDesignName>modelo</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 <Column name="CATEGORIA_id_categoria" id="BAC6E6FD-95DB-5D23-CBC7-3F696A6438DD">
 <createdBy>Patty Reyes</createdBy>
 <createdTime>2024-03-12 05:09:16 UTC</createdTime>

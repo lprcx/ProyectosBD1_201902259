@@ -31,17 +31,6 @@
 <ownDataTypeParameters>200,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="id_pais" id="06521D18-271B-45B1-3110-5F4C6669B668">
-<createdBy>Patty Reyes</createdBy>
-<createdTime>2024-03-12 05:09:16 UTC</createdTime>
-<generatorID>A45F10CB-E1A9-2102-E081-F8417F88BBBD</generatorID>
-<ownerDesignName>modelo</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 <Column name="PAIS_id_pais" id="88587D2F-7185-FE5D-5CB2-3E85FE6001C1">
 <createdBy>Patty Reyes</createdBy>
 <createdTime>2024-03-12 05:09:16 UTC</createdTime>
