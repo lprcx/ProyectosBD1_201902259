@@ -57,6 +57,17 @@
 <colAssociation fkAssociation="5E0A906C-BB8C-478F-6C97-CD8A3BC8CB5D" referredColumn="7AC6F56E-1A9C-9CCC-E263-16711F0FEEF9"/>
 </associations>
 </Column>
+<Column name="id_categoría" id="130679E8-AEB8-740D-5CEE-91F4C5F09318">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>550A0796-805C-A4FA-A699-DC263A258DA5</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="B6C01FD8-A1CD-C464-BED9-FDFEC65048CA" name="PRODUCTO_PK">

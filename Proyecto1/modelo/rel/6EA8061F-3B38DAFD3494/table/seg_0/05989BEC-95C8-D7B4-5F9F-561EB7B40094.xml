@@ -126,6 +126,17 @@
 <colAssociation fkAssociation="886FF005-B47E-1520-3D0C-8C4FBE0667EE" referredColumn="3DE9AC4A-03CE-801C-18FF-04F0A6AB0962"/>
 </associations>
 </Column>
+<Column name="id_pais" id="61C2B771-D57D-B93D-D63E-4134BEDBD150">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>FBFAF1E1-3A67-E603-FF1C-FBF7D821EFB5</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="487813D8-3546-9145-B798-1A052504C5C1" name="CLIENTE_PK">

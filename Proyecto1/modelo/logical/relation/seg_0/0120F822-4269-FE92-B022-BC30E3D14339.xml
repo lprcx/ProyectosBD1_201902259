@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="ORPO" directorySegmentName="seg_0" id="0120F822-4269-FE92-B022-BC30E3D14339">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:18:36 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<sourcePk>E6465412-5A52-A1F4-0939-833771F7A294</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>EF582CBD-A84C-57F5-BD1C-1533CC1C3994</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>4B91E032-C53D-5143-510B-D24CF5D52F92</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

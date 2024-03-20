@@ -1,0 +1,83 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="EF582CBD-A84C-57F5-BD1C-1533CC1C3994" name="ORDEN">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:13:18 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_orden" id="6AF617FF-047F-EF58-7861-1D3BB5BFBE51">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:13:48 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha_orden" id="85DE4A49-4204-B8AD-4C63-5F15F8CF8538">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:14:19 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_cliente" id="56B2C2D9-D664-FB8F-0154-1D8BD324AE4C">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:14:36 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_cliente1" id="1D66E264-BA2E-42B5-F903-53A8B223CF46">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:18:54 UTC</createdTime>
+<generatorID>2C8FEC43-E1F7-3145-289A-01811AC23AAE</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<referedAttribute>14A45327-FCE8-2641-2345-0488B41D8766</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="E6465412-5A52-A1F4-0939-833771F7A294" name="ORDEN PK">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:14:18 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>6AF617FF-047F-EF58-7861-1D3BB5BFBE51</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

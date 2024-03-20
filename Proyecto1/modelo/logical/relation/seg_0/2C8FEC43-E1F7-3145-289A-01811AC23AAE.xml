@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="CLORD" directorySegmentName="seg_0" id="2C8FEC43-E1F7-3145-289A-01811AC23AAE">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:18:54 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<sourcePk>CF0DF743-7230-7FFC-28A6-3E1A24FA50AC</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>9C7015EB-7B34-F8BB-86E7-BD862CBE20F6</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>EF582CBD-A84C-57F5-BD1C-1533CC1C3994</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

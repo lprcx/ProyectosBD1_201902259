@@ -15,7 +15,7 @@ CREATE TEMPORARY TABLE temp_cliente (
     nombre       VARCHAR(100),
     apellido     VARCHAR(100),
     direccion    VARCHAR(200),
-    telefono     VARCHAR(8),
+    telefono     VARCHAR(20),
     tarjeta      VARCHAR(20),
     edad         INT,
     salario      INT,
@@ -37,17 +37,18 @@ CREATE TEMPORARY TABLE temp_vendedor (
 );
 
 CREATE TEMPORARY TABLE temp_orden (
-    id_orden             INT,
-    linea_orden          INT,
-    fecha                DATE,
-    id_cliente           INT,
-    id_vendedor          INT 
+    id_orden             INT NOT NULL,
+    fecha                DATE NOT NULL,
+    id_cliente           INT NOT NULL
 );
 
 CREATE TEMPORARY TABLE temp_producto_orden (
-    id_orden             INT,
-    id_producto          INT,
-    cantidad             INT 
+    id_lineastabla      INT AUTO_INCREMENT PRIMARY KEY,
+    id_orden             INT NOT NULL,
+    id_producto          INT NOT NULL,
+    cantidad             INT NOT NULL,
+    linea_orden          INT NOT NULL,
+    id_vendedor          INT NOT NULL
 );
 `;
 
@@ -70,7 +71,7 @@ CREATE TABLE empr.CLIENTE (
     nombre       VARCHAR(100) NOT NULL,
     apellido     VARCHAR(100) NOT NULL,
     direccion    VARCHAR(200) NOT NULL,
-    telefono     INT NOT NULL,
+    telefono     VARCHAR(20),
     tarjeta      VARCHAR(20) NOT NULL,
     edad         INT NOT NULL,
     salario      INT NOT NULL,
@@ -98,21 +99,24 @@ CREATE TABLE empr.VENDEDOR (
 );
 
 CREATE TABLE empr.ORDEN (
+    id                  INT NOT NULL AUTO_INCREMENT,
     id_orden             INT NOT NULL,
-    linea_orden          INT NOT NULL,
     fecha                DATE NOT NULL,
     id_cliente           INT NOT NULL,
-    id_vendedor          INT NOT NULL,
-    PRIMARY KEY (id_orden),
-    FOREIGN KEY (id_cliente) REFERENCES empr.CLIENTE(id_cliente),
-    FOREIGN KEY (id_vendedor) REFERENCES empr.VENDEDOR(id_vendedor)
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 );
 
 CREATE TABLE empr.PRODUCTO_ORDEN (
+    id_lineastabla      INT AUTO_INCREMENT,
     id_orden             INT NOT NULL,
     id_producto          INT NOT NULL,
     cantidad             INT NOT NULL,
-    FOREIGN KEY (id_orden) REFERENCES empr.ORDEN(id_orden),
-    FOREIGN KEY (id_producto) REFERENCES empr.PRODUCTO(id_producto)
+    linea_orden          INT NOT NULL,
+    id_vendedor          INT NOT NULL,
+    PRIMARY KEY (id_lineastabla),
+    FOREIGN KEY (id_orden) REFERENCES orden(id),
+    FOREIGN KEY (id_producto) REFERENCES producto(id_producto),
+    FOREIGN KEY (id_vendedor) REFERENCES vendedor(id_vendedor)
 );
 `;

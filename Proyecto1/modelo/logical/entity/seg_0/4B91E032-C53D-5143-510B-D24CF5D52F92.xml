@@ -1,0 +1,147 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="4B91E032-C53D-5143-510B-D24CF5D52F92" name="PRODUCTO_ORDEN">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:15:05 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_lineastabla" id="4E75128E-C709-A37B-FF4D-02146E488891">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:15:16 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_orden" id="3BE1188D-CA0D-E94F-0CF9-700F385EB085">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:15:55 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="linea_orden" id="C1C21C74-3FBE-F5BB-89C2-9CCCD60E4962">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:16:08 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_vendedor" id="4733C68C-0DE0-35CC-30EC-C8A9F6E22C46">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:18:09 UTC</createdTime>
+<generatorID>883E6126-B59C-272D-BA8C-C417D5D717CA</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<referedAttribute>FE22CC37-787F-A39B-6BE4-70619C2D08AB</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_producto" id="2F3E1E46-44AE-3DD1-C420-36F83DA6A2DB">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:16:21 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cantidad" id="08181AB8-5BC7-6D4D-4213-571FA082788F">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:17:08 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_producto1" id="44A595C4-2955-67CD-0109-C08CFE101E8A">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:18:22 UTC</createdTime>
+<generatorID>22F0FA1D-9F3D-7557-39E3-C0B30AD495C5</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<referedAttribute>51160165-0439-DFC1-F50C-C4EDA10B73F2</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_orden1" id="A14B6561-7918-2CE1-792D-47893F6B63B4">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:18:36 UTC</createdTime>
+<generatorID>0120F822-4269-FE92-B022-BC30E3D14339</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<referedAttribute>6AF617FF-047F-EF58-7861-1D3BB5BFBE51</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_vendedor_1" id="03119BF4-0242-82CF-2973-970AD8581D02">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:07 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="34F9D767-8CF2-2051-CE7C-0DD872A08EA6" name="PRODUCTO_ORDEN PK">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:15:54 UTC</createdTime>
+<ownerDesignName>modelo</ownerDesignName>
+<engineerTo>
+<item key="6EA8061F-83AC-F5FC-D834-3B38DAFD3494" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>4E75128E-C709-A37B-FF4D-02146E488891</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

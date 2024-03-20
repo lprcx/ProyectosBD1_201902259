@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="87865F3E-F59E-B0A5-DCE4-30C2CBDDBA34" name="ORDENv1">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>EF582CBD-A84C-57F5-BD1C-1533CC1C3994</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_orden" id="45B1FBE6-7A38-DFF7-277A-D6E0F6DFC5EC">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>6AF617FF-047F-EF58-7861-1D3BB5BFBE51</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_orden" id="7D83A4FA-98EE-E55A-3BB6-904A8A084129">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>85DE4A49-4204-B8AD-4C63-5F15F8CF8538</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CLIENTE_id_cliente" id="7E05470C-3FF4-B297-E02F-91AC50A5D0BA">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>1D66E264-BA2E-42B5-F903-53A8B223CF46</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D32354E8-E278-2CCB-CFB1-E260F2050F78" referredColumn="F2E31F9D-22AA-4861-6391-06A312F60F8A"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D6961E5F-721C-AB71-16C8-EDB0CF709D72" name="ORDENv1_PK">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>E6465412-5A52-A1F4-0939-833771F7A294</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="45B1FBE6-7A38-DFF7-277A-D6E0F6DFC5EC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6A372599-4EE3-C5DA-A0D8-563191F1BB36" name="ORDENv1_CLIENTE_FK">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>2C8FEC43-E1F7-3145-289A-01811AC23AAE</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7E05470C-3FF4-B297-E02F-91AC50A5D0BA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

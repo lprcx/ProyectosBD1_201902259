@@ -1,0 +1,137 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2B8ECAD2-6051-CE64-49A8-94B24BBBF84C" name="PRODUCTO_ORDENv1">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>4B91E032-C53D-5143-510B-D24CF5D52F92</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_lineastabla" id="B9E4C900-E1CB-66DD-F57A-0913E77DB23D">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>4E75128E-C709-A37B-FF4D-02146E488891</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="linea_orden" id="1429574B-1CEC-C698-CA5E-4C5507762CD3">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>C1C21C74-3FBE-F5BB-89C2-9CCCD60E4962</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cantidad" id="4F85ED3E-7FD9-EFDB-364B-99D9971DC817">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>08181AB8-5BC7-6D4D-4213-571FA082788F</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="VENDEDOR_id_vendedor" id="F6AFC77F-FA3C-56B0-244E-96A0B0291A0C">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>4733C68C-0DE0-35CC-30EC-C8A9F6E22C46</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A7511807-56F6-E3F0-5637-AA250C539C38" referredColumn="BD92CB75-1CB2-0DF7-A27A-ABFBD9BD5E40"/>
+</associations>
+</Column>
+<Column name="PRODUCTO_id_producto" id="4C8421EA-BC86-1819-87ED-7CC072785A9F">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>44A595C4-2955-67CD-0109-C08CFE101E8A</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8B966F28-2458-6DB8-E98C-E66CEAFE2025" referredColumn="CFE58B95-0C4A-3D52-978B-9EBA5AE5A05A"/>
+</associations>
+</Column>
+<Column name="ORDENv1_id_orden" id="52A09171-AEC2-BBF2-8482-676BE5021CCF">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>A14B6561-7918-2CE1-792D-47893F6B63B4</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0F621875-BF7E-08D1-247F-781CC9AC5B1E" referredColumn="45B1FBE6-7A38-DFF7-277A-D6E0F6DFC5EC"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3AFF59C2-EDFD-678E-5172-50AED830B774" name="PRODUCTO_ORDENv1_PK">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>34F9D767-8CF2-2051-CE7C-0DD872A08EA6</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B9E4C900-E1CB-66DD-F57A-0913E77DB23D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1F680257-7F34-AA93-1406-CFA0B41E53E5" name="PRODUCTO_ORDENv1_ORDENv1_FK">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>0120F822-4269-FE92-B022-BC30E3D14339</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="52A09171-AEC2-BBF2-8482-676BE5021CCF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E2AADBAC-58C1-AD06-5B8B-EBCB3A8FEA3C" name="PRODUCTO_ORDENv1_PRODUCTO_FK">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>22F0FA1D-9F3D-7557-39E3-C0B30AD495C5</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4C8421EA-BC86-1819-87ED-7CC072785A9F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FD64EA1A-E748-5C8C-C6F9-839A06FD74BC" name="PRODUCTO_ORDENv1_VENDEDOR_FK">
+<createdBy>Patty Reyes</createdBy>
+<createdTime>2024-03-20 05:21:59 UTC</createdTime>
+<generatorID>883E6126-B59C-272D-BA8C-C417D5D717CA</generatorID>
+<ownerDesignName>modelo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F6AFC77F-FA3C-56B0-244E-96A0B0291A0C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
