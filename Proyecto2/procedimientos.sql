@@ -211,13 +211,15 @@ DELIMITER ;
 -- -----------------------------------------------------------------
 -- ------ ///// registrarcuenta
 DROP PROCEDURE IF EXISTS registrarCuenta;
+-- ------ ///// registrarcuenta
+
 DELIMITER $$
 CREATE PROCEDURE registrarCuenta(
-    IN  proc_id_cuenta BIGINT,
+    IN  pc_id_cuenta DECIMAL(20,0),
     IN 	proc_monto_apertura  DECIMAL(12,2),
     IN	proc_saldo_cuenta    DECIMAL(12,2),
     IN	proc_descripcion     VARCHAR(200),
-    IN	proc_fecha_apertura  DATETIME,
+    IN	proc_fecha_apertura  VARCHAR(50),
     IN 	proc_otros_detalles  VARCHAR(100),
     IN	proc_tipo_cuenta     INT,
     IN	proc_id_cliente      INT
@@ -226,7 +228,11 @@ BEGIN
 	DECLARE cuenta_existente BOOLEAN;
     DECLARE tipo_cuenta_valido INT;
     DECLARE cliente_valido INT;
-	SET cuenta_existente = cuentaExistente(proc_id_cuenta);
+    DECLARE fecha_valida INT;
+    DECLARE formatted_fecha_apertura DATETIME;
+    
+	SET cuenta_existente = cuentaExistente(pc_id_cuenta);
+    SET fecha_valida = validarFecha(proc_fecha_apertura);
 
 	IF cuenta_existente THEN
 		SELECT 'El número de cuenta ya existe' AS ERROR;
@@ -238,8 +244,8 @@ BEGIN
                 SELECT 'El saldo de cuenta no puede ser negativo' AS ERROR;
             ELSE
                 SELECT COUNT(*) INTO tipo_cuenta_valido
-                FROM tipo_cuenta
-                WHERE id_tipo = proc_tipo_cuenta;
+                FROM tipocuenta
+                WHERE codigo = proc_tipo_cuenta;
                 IF tipo_cuenta_valido = 0 THEN
                     SELECT 'El tipo de cuenta no existe' AS ERROR;
                 ELSE
@@ -250,17 +256,82 @@ BEGIN
                         SELECT 'El cliente no existe' AS ERROR;
                     ELSE
 						-- Si no se proporciona una fecha de apertura, utilizar la fecha y hora actual
-                        IF proc_fecha_apertura IS NULL THEN
+                        IF proc_fecha_apertura = '' THEN
                             SET proc_fecha_apertura = NOW();
-                        END IF;
-                        INSERT INTO cuenta (id_cuenta, monto_apertura, saldo_cuenta, descripcion, fecha_apertura, otros_detalles, tipo_cuenta, id_cliente)
-                        VALUES (proc_id_cuenta, proc_monto_apertura, proc_saldo_cuenta, proc_descripcion, proc_fecha_apertura, proc_otros_detalles, proc_tipo_cuenta, proc_id_cliente);
-                        SELECT 'Cuenta registrada exitosamente' AS SUCCESS;
+							INSERT INTO cuenta (id_cuenta, monto_apertura, saldo_cuenta, descripcion, fecha_apertura, otros_detalles, tipo_cuenta, id_cliente)
+							VALUES (pc_id_cuenta, proc_monto_apertura, proc_saldo_cuenta, proc_descripcion, proc_fecha_apertura, proc_otros_detalles, proc_tipo_cuenta, proc_id_cliente);
+							SELECT 'Cuenta registrada exitosamente' AS SUCCESS;
+						ELSE
+							-- IF fecha_valida THEN
+								SET formatted_fecha_apertura = STR_TO_DATE(proc_fecha_apertura, '%d/%m/%Y %H:%i:%s');
+								INSERT INTO cuenta (id_cuenta, monto_apertura, saldo_cuenta, descripcion, fecha_apertura, otros_detalles, tipo_cuenta, id_cliente)
+								VALUES (pc_id_cuenta, proc_monto_apertura, proc_saldo_cuenta, proc_descripcion, formatted_fecha_apertura, proc_otros_detalles, proc_tipo_cuenta, proc_id_cliente);
+								SELECT 'Cuenta registrada exitosamente' AS SUCCESS;
+							-- ELSE
+								-- SELECT 'Formato de fecha no valido' as ERROR;
+                            -- END IF;
+						END IF;
                     END IF;
                 END IF;
             END IF;
         END IF;
 	END IF;
+END$$
+
+DELIMITER ;
+
+------------------------------------------------------------------------------------------------------
+
+-- ------ ///// realizar compra
+DELIMITER $$
+CREATE PROCEDURE realizarCompra(
+    IN  proc_id_compra 	INT,
+    IN 	proc_fecha 		VARCHAR(50),
+    IN	proc_importe    DECIMAL(12,2),
+    IN	proc_otros_det  VARCHAR(200),
+    IN	proc_codigo_ps  INT,
+    IN	proc_id_cliente INT
+) 
+BEGIN
+	DECLARE producto_costo DECIMAL(12,2);
+	DECLARE producto_tipo INT;
+    DECLARE formatted_fecha DATE;
+    
+	IF proc_id_cliente IN(SELECT id_cliente FROM cliente) THEN
+		IF proc_codigo_ps IN(SELECT codigo FROM producto_servicio) THEN
+			IF 0 < proc_codigo_ps <= 10 THEN
+				-- Obtener el costo del producto
+				SELECT costo INTO producto_costo FROM producto_servicio WHERE codigo = proc_codigo_ps;
+				-- Verificar que el importe sea igual al costo del producto
+				IF producto_costo = proc_importe THEN
+					SET formatted_fecha = STR_TO_DATE(proc_fecha, '%d/%m/%Y');
+					INSERT INTO COMPRA (id_compra, fecha, importe, otros_det, codigo_ps, id_cliente) 
+					VALUES (proc_id_compra, formatted_fecha, proc_importe, proc_otros_det, proc_codigo_ps, proc_id_cliente);
+					SELECT 'Compra de servicio registrada exitosamente' AS SUCCESS;
+				ELSE
+					SELECT 'El importe no coincide con el costo del producto' AS ERROR;
+				END IF;
+			ELSE
+				-- Obtener el tipo del producto
+				SELECT tipo INTO producto_tipo FROM producto_servicio WHERE tipo = 2;
+                IF tipo = 2 THEN
+					IF proc_importe IS NOT NULL THEN
+						SET formatted_fecha = STR_TO_DATE(proc_fecha, '%d/%m/%Y');
+						INSERT INTO COMPRA (id_compra, fecha, importe, otros_det, codigo_ps, id_cliente) 
+						VALUES (proc_id_compra, formatted_fecha, proc_importe, proc_otros_det, proc_codigo_ps, proc_id_cliente);
+						SELECT 'Compra de servicio registrada exitosamente' AS SUCCESS;
+                    ELSE
+						SELECT 'Debe ingresar el importe' AS ERROR;
+                    END IF;
+                END IF;
+			END IF;
+		ELSE
+			SELECT 'El producto no existe' AS ERROR;
+		END IF;
+    ELSE
+		SELECT 'El cliente no existe' AS ERROR;
+    END IF;
+
 END$$
 
 DELIMITER ;
