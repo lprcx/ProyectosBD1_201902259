@@ -1,28 +1,29 @@
+DROP DATABASE banco;
 --- BASE DE DATOS
 CREATE DATABASE IF NOT EXISTS banco;
 
 ------ MODELO DE DATOS ---------
 CREATE TABLE IF NOT EXISTS banco.TIPOCL (
-    id_tipo INT(10) NOT NULL,
+    id_tipo INT AUTO_INCREMENT,
     nombre       VARCHAR(40) NOT NULL,
     descripcion  VARCHAR(200) NOT NULL,
     PRIMARY KEY (id_tipo)
 );
 
 CREATE TABLE IF NOT EXISTS banco.CLIENTE (
-    id_cliente INT(10) NOT NULL,
-    nombre      VARCHAR(40) NOT NULL,
-    apellidos      VARCHAR(40) NOT NULL,
+    id_cliente INT NOT NULL,
+    nombre      VARCHAR(50) NOT NULL,
+    apellidos      VARCHAR(50) NOT NULL,
     usuario      VARCHAR(40) NOT NULL,
     contraseña      VARCHAR(200) NOT NULL,
-    tipo_cliente      INT(10) NOT NULL,
+    tipo_cliente      INT NOT NULL,
     PRIMARY KEY (id_cliente),
     FOREIGN KEY (tipo_cliente) REFERENCES TIPOCL(id_tipo)
 );
 
 CREATE TABLE IF NOT EXISTS banco.CORREO (
     correlativoc INT AUTO_INCREMENT,
-    id_cliente   INT(10) NOT NULL,
+    id_cliente   INT NOT NULL,
     correo VARCHAR(40) NOT NULL,
     PRIMARY KEY (correlativoc),
     FOREIGN KEY (id_cliente) REFERENCES CLIENTE(id_cliente)
@@ -30,28 +31,28 @@ CREATE TABLE IF NOT EXISTS banco.CORREO (
 
 CREATE TABLE IF NOT EXISTS banco.TELEFONO (
     correlativot INT AUTO_INCREMENT,
-    id_cliente   INT(10) NOT NULL,
+    id_cliente   INT NOT NULL,
     telefono VARCHAR(12) NOT NULL,
     PRIMARY KEY (correlativot),
     FOREIGN KEY (id_cliente) REFERENCES CLIENTE(id_cliente)
 );
 
 CREATE TABLE IF NOT EXISTS banco.TIPOCUENTA (
-    codigo  INT(10) AUTO_INCREMENT,
-    nombre VARCHAR(20) NOT NULL,
+    codigo  INT AUTO_INCREMENT,
+    nombre VARCHAR(40) NOT NULL,
     descripcion VARCHAR(200) NOT NULL,
     PRIMARY KEY (codigo)
 );
 
 CREATE TABLE IF NOT EXISTS banco.CUENTA (
-    id_cuenta       BIGINT(10) NOT NULL,
+    id_cuenta       DECIMAL(20,0) NOT NULL,
     monto_apertura  DECIMAL(12,2) NOT NULL,
     saldo_cuenta    DECIMAL(12,2) NOT NULL,
     descripcion     VARCHAR(200)   NOT NULL,
     fecha_apertura  DATETIME,
-    otros_detalles  VARCHAR(100),
-    tipo_cuenta     INT(10) NOT NULL,
-    id_cliente      INT(10) NOT NULL,
+    otros_detalles  VARCHAR(200),
+    tipo_cuenta     INT NOT NULL,
+    id_cliente      INT NOT NULL,
     PRIMARY KEY (id_cuenta),
     FOREIGN KEY (tipo_cuenta) REFERENCES TIPOCUENTA(codigo),
     FOREIGN KEY (id_cliente) REFERENCES CLIENTE(id_cliente)
@@ -60,7 +61,7 @@ CREATE TABLE IF NOT EXISTS banco.CUENTA (
 
 CREATE TABLE IF NOT EXISTS banco.PRODUCTO_SERVICIO (
     codigo      INT NOT NULL,
-    tipo        INT(1) NOT NULL,
+    tipo        INT NOT NULL,
     costo       DECIMAL(12,2) NOT NULL,
     descripcion_ps VARCHAR(200) NOT NULL,
     PRIMARY KEY (codigo)
@@ -92,15 +93,15 @@ CREATE TABLE IF NOT EXISTS banco.DEBITO (
     id_debito     INT NOT NULL,
     fecha           DATE NOT NULL,
     monto           DECIMAL(12,2) NOT NULL,
-    otros_detalles  VARCHAR(40),
+    otros_detalles  VARCHAR(100),
     id_cliente      INT NOT NULL,
     PRIMARY KEY (id_debito),
     FOREIGN KEY (id_cliente) REFERENCES CLIENTE(id_cliente)
 );
 
 CREATE TABLE IF NOT EXISTS banco.TIPO_TRANSACCION (
-    codigo_transaccion  INT NOT NULL,
-    nombre              VARCHAR(20),
+    codigo_transaccion  INT AUTO_INCREMENT,
+    nombre              VARCHAR(40),
     descripcion         VARCHAR(200),
     PRIMARY KEY (codigo_transaccion)
 );
@@ -108,12 +109,12 @@ CREATE TABLE IF NOT EXISTS banco.TIPO_TRANSACCION (
 CREATE TABLE IF NOT EXISTS banco.TRANSACCION (
     id_transaccion      INT AUTO_INCREMENT,
     fecha               DATE NOT NULL,
-    otros_det           VARCHAR(40),
+    otros_det           VARCHAR(200),
     id_tipo_transaccion INT NOT NULL,
     id_compra           INT,
     id_deposito         INT,
     id_debito           INT,
-    numero_cuenta       BIGINT(10) NOT NULL,
+    numero_cuenta       DECIMAL(20,0) NOT NULL,
     PRIMARY KEY (id_transaccion),
     FOREIGN KEY (id_tipo_transaccion) REFERENCES TIPO_TRANSACCION(codigo_transaccion),
     FOREIGN KEY (id_compra) REFERENCES COMPRA(id_compra),
@@ -298,3 +299,34 @@ DELIMITER ;
 
 
 
+SELECT * FROM banco.transaccion;
+DELETE FROM banco.transaccion;
+
+SELECT * FROM banco.tipo_transaccion;
+DELETE FROM banco.tipo_transaccion;
+
+SELECT * FROM banco.deposito;
+DELETE FROM banco.deposito;
+
+SELECT * FROM banco.compra;
+DELETE FROM banco.compra;
+
+SELECT * FROM banco.cuenta;
+DELETE FROM banco.cuenta;
+
+SELECT * FROM banco.cliente;
+DELETE FROM banco.cliente;
+
+SELECT * FROM banco.producto_servicio;
+DELETE FROM banco.producto_servicio;
+
+SELECT * FROM banco.tipocuenta;
+DELETE FROM banco.tipocuenta;
+
+SELECT * FROM banco.tipocl;
+DELETE FROM banco.tipocl;
+
+SELECT * FROM banco.correo;
+DELETE FROM banco.correo;
+SELECT * FROM banco.telefono;
+DELETE FROM banco.telefono;

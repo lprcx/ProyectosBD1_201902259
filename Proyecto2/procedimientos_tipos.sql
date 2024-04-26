@@ -43,4 +43,6 @@ call banco.crearProductoServicio(16, 2, 0, 'Servicio de suscripción plataformas
 call banco.crearProductoServicio(17, 2, 0, 'Servicios Cloud');
 
 ------------------------------------------------------------------------------------------------------
-
+registrarTipoTransaccion(1, 'Compra', 'Transacción de compra');
+registrarTipoTransaccion(2, 'Deposito', 'Transacción de deposito');
+registrarTipoTransaccion(3, 'Debito', 'Transacción de debito');

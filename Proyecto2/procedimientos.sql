@@ -281,7 +281,6 @@ END$$
 DELIMITER ;
 
 ------------------------------------------------------------------------------------------------------
-
 -- ------ ///// realizar compra
 DELIMITER $$
 CREATE PROCEDURE realizarCompra(
@@ -297,10 +296,11 @@ BEGIN
 	DECLARE producto_tipo INT;
     DECLARE formatted_fecha DATE;
     
+IF proc_id_compra NOT IN(SELECT id_compra FROM compra) THEN
 	IF proc_id_cliente IN(SELECT id_cliente FROM cliente) THEN
 		IF proc_codigo_ps IN(SELECT codigo FROM producto_servicio) THEN
-			IF 0 < proc_codigo_ps <= 10 THEN
-				-- Obtener el costo del producto
+			SELECT tipo INTO producto_tipo FROM producto_servicio WHERE codigo = proc_codigo_ps;
+			IF producto_tipo = 1 THEN
 				SELECT costo INTO producto_costo FROM producto_servicio WHERE codigo = proc_codigo_ps;
 				-- Verificar que el importe sea igual al costo del producto
 				IF producto_costo = proc_importe THEN
@@ -312,14 +312,16 @@ BEGIN
 					SELECT 'El importe no coincide con el costo del producto' AS ERROR;
 				END IF;
 			ELSE
-				-- Obtener el tipo del producto
-				SELECT tipo INTO producto_tipo FROM producto_servicio WHERE tipo = 2;
-                IF tipo = 2 THEN
+				IF producto_tipo = 2 THEN
 					IF proc_importe IS NOT NULL THEN
-						SET formatted_fecha = STR_TO_DATE(proc_fecha, '%d/%m/%Y');
-						INSERT INTO COMPRA (id_compra, fecha, importe, otros_det, codigo_ps, id_cliente) 
-						VALUES (proc_id_compra, formatted_fecha, proc_importe, proc_otros_det, proc_codigo_ps, proc_id_cliente);
-						SELECT 'Compra de servicio registrada exitosamente' AS SUCCESS;
+						IF proc_importe > 0 THEN
+							SET formatted_fecha = STR_TO_DATE(proc_fecha, '%d/%m/%Y');
+							INSERT INTO COMPRA (id_compra, fecha, importe, otros_det, codigo_ps, id_cliente) 
+							VALUES (proc_id_compra, formatted_fecha, proc_importe, proc_otros_det, proc_codigo_ps, proc_id_cliente);
+							SELECT 'Compra de servicio registrada exitosamente' AS SUCCESS;
+                        ELSE
+							SELECT 'Debe ingresar un importe mayor a cero' AS ERROR;
+                        END IF;
                     ELSE
 						SELECT 'Debe ingresar el importe' AS ERROR;
                     END IF;
@@ -331,7 +333,259 @@ BEGIN
     ELSE
 		SELECT 'El cliente no existe' AS ERROR;
     END IF;
+ELSE
+	SELECT 'ID de compra ya existe' as ERROR;
+END IF;
 
 END$$
 
 DELIMITER ;
+
+
+
+-- -----------------------------------------------------------------
+-- ------ ///// realizar DEPOSITO
+DELIMITER $$
+CREATE PROCEDURE realizarDeposito(
+    IN  proc_id_deposito 	INT,
+    IN 	proc_fecha 		VARCHAR(50),
+    IN	proc_monto    DECIMAL(12,2),
+    IN	proc_otros_det  VARCHAR(200),
+    IN	proc_id_cliente INT
+) 
+BEGIN
+    DECLARE formatted_fecha DATE;
+    DECLARE iddebito_valido BOOLEAN;
+    
+    SET iddebito_valido = soloNumeros(proc_id_deposito);
+    
+IF proc_id_deposito NOT IN(SELECT id_deposito FROM deposito) THEN
+	IF iddebito_valido THEN
+		IF proc_id_cliente IN(SELECT id_cliente FROM cliente) THEN
+			IF proc_monto > 0 THEN
+				SET formatted_fecha = STR_TO_DATE(proc_fecha, '%d/%m/%Y');
+				INSERT INTO DEPOSITO (id_deposito, fecha, monto, otros_detalles, id_cliente) 
+				VALUES (proc_id_deposito, formatted_fecha, proc_monto, proc_otros_det, proc_id_cliente);
+				SELECT 'Deposito registrado exitosamente' AS SUCCESS;
+			ELSE
+				SELECT 'Debe ingresar un importe mayor a cero' AS ERROR;
+            END IF;
+		ELSE
+			SELECT 'El cliente no existe' AS ERROR;
+		END IF;
+	ELSE
+		SELECT 'Ingrese un tipo de dato entero' as ERROR;
+	END IF;
+ELSE
+	SELECT 'ID de deposito ya existe' as ERROR;
+END IF;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------------------
+-- ------ ///// realizar realizarDebito
+DELIMITER $$
+CREATE PROCEDURE realizarDebito(
+    IN  proc_id_debito 	INT,
+    IN 	proc_fecha 		VARCHAR(50),
+    IN	proc_monto    DECIMAL(12,2),
+    IN	proc_otros_det  VARCHAR(200),
+    IN	proc_id_cliente INT
+) 
+BEGIN
+    DECLARE formatted_fecha DATE;
+    DECLARE iddebito_valido BOOLEAN;
+    
+    SET iddebito_valido = soloNumeros(proc_id_debito);
+    
+IF proc_id_debito NOT IN(SELECT id_debito FROM debito) THEN
+	IF iddebito_valido THEN
+		IF proc_id_cliente IN(SELECT id_cliente FROM cliente) THEN
+			IF proc_monto > 0 THEN
+					SET formatted_fecha = STR_TO_DATE(proc_fecha, '%d/%m/%Y');
+					INSERT INTO DEBITO (id_debito, fecha, monto, otros_detalles, id_cliente) 
+					VALUES (proc_id_debito, formatted_fecha, proc_monto, proc_otros_det, proc_id_cliente);
+					SELECT 'Debito registrado exitosamente' AS SUCCESS;
+			ELSE
+				SELECT 'Debe ingresar un importe mayor a cero' AS ERROR;
+            END IF;
+		ELSE
+			SELECT 'El cliente no existe' AS ERROR;
+		END IF;
+	ELSE
+		SELECT 'Ingrese un tipo de dato entero' as ERROR;
+	END IF;
+ELSE
+	SELECT 'ID de debido ya existe' as ERROR;
+END IF;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------------------
+-- ------ ///// realizar registrarTipoTransaccion
+DELIMITER $$
+CREATE PROCEDURE registrarTipoTransaccion(
+    IN  proc_codigo_transaccion 	INT,
+    IN 	proc_nombre 		VARCHAR(40),
+    IN	proc_descripcion  VARCHAR(200)
+) 
+BEGIN
+    
+IF proc_codigo_transaccion NOT IN(SELECT id_deposito FROM deposito) THEN
+	IF iddebito_valido THEN
+		IF proc_id_cliente IN(SELECT id_cliente FROM cliente) THEN
+			IF proc_monto > 0 THEN
+				SET formatted_fecha = STR_TO_DATE(proc_fecha, '%d/%m/%Y');
+				INSERT INTO DEPOSITO (id_deposito, fecha, monto, otros_detalles, id_cliente) 
+				VALUES (proc_id_deposito, formatted_fecha, proc_monto, proc_otros_det, proc_id_cliente);
+				SELECT 'Deposito registrado exitosamente' AS SUCCESS;
+			ELSE
+				SELECT 'Debe ingresar un importe mayor a cero' AS ERROR;
+            END IF;
+		ELSE
+			SELECT 'El cliente no existe' AS ERROR;
+		END IF;
+	ELSE
+		SELECT 'Ingrese un tipo de dato entero' as ERROR;
+	END IF;
+ELSE
+	SELECT 'ID de deposito ya existe' as ERROR;
+END IF;
+END$$
+
+DELIMITER ;
+
+
+-- -----------------------------------------------------------------
+-- ------ ///// realizar registrarTipoTransaccion
+DELIMITER $$
+CREATE PROCEDURE registrarTipoTransaccion(
+    IN  proc_codigo_transaccion 	INT,
+    IN 	proc_nombre 		VARCHAR(40),
+    IN	proc_descripcion  VARCHAR(200)
+) 
+BEGIN
+    
+IF proc_codigo_transaccion NOT IN(SELECT codigo_transaccion FROM tipo_transaccion) THEN
+		IF proc_nombre NOT IN(SELECT nombre FROM tipo_transaccion) THEN
+				INSERT INTO tipo_transaccion (codigo_transaccion, nombre, descripcion) 
+				VALUES (proc_codigo_transaccion, proc_nombre, proc_descripcion);
+				SELECT 'Tipo de transacción registrado exitosamente' AS SUCCESS;
+		ELSE
+			SELECT 'El nombre de la transacción ya existe' AS ERROR;
+		END IF;
+ELSE
+	SELECT 'ID de transacción ya existe' as ERROR;
+END IF;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------------------
+-- ------ ///// realizar asignarTransaccion
+DELIMITER $$
+CREATE PROCEDURE asignarTransaccion(
+    IN proc_id_transaccion      INT,
+    IN proc_fecha               VARCHAR(50),
+    IN proc_otros_det           VARCHAR(200),
+    IN proc_id_tipo_transaccion INT,
+    IN proc_id_cdd           INT,
+    IN proc_numero_cuenta       DECIMAL(20,0)
+) 
+BEGIN
+DECLARE tipotrans INT;
+DECLARE formatted_fecha DATE;
+DECLARE nuevo_saldo DECIMAL(12,2);
+DECLARE saldoc DECIMAL(12,2);
+DECLARE importec DECIMAL(12,2);
+DECLARE idc INT;
+DECLARE montoc DECIMAL(12,2);
+DECLARE montod DECIMAL(12,2);
+
+	IF proc_id_transaccion NOT IN(SELECT id_transaccion FROM transaccion) THEN
+		IF proc_id_tipo_transaccion IN(SELECT codigo_transaccion FROM tipo_transaccion) THEN
+			SELECT codigo_transaccion INTO tipotrans FROM tipo_transaccion WHERE codigo_transaccion = proc_id_tipo_transaccion;
+			IF tipotrans = 1 THEN -- COMPRA
+				IF proc_id_cdd IN(SELECT id_compra FROM compra) THEN
+					SELECT id_cliente INTO idc FROM compra WHERE id_compra = proc_id_cdd;
+					SELECT saldo_cuenta INTO saldoc FROM cuenta WHERE id_cliente = idc;
+					SELECT importe INTO importec FROM compra WHERE id_compra = proc_id_cdd;
+					IF saldoc > importec THEN
+						SET formatted_fecha = STR_TO_DATE(proc_fecha, '%d/%m/%Y');
+						INSERT INTO TRANSACCION (id_transaccion, fecha, otros_det, id_tipo_transaccion, id_compra, numero_cuenta) 
+						VALUES (proc_id_transaccion, formatted_fecha, proc_otros_det, proc_id_tipo_transaccion, proc_id_cdd, proc_numero_cuenta);
+						SELECT 'Compra registrada exitosamente' AS SUCCESS;
+						-- nuevo saldo de la cuenta
+						SET nuevo_saldo = saldoc - importec;
+						UPDATE cuenta 
+						SET saldo_cuenta = nuevo_saldo
+						WHERE id_cliente = idc;
+					ELSE
+						SELECT 'Saldo insuficiente para realizar la compra' AS ERROR;
+					END IF;
+				ELSE
+					SELECT 'El id de compra no existe' AS ERROR;
+				END IF;
+			ELSEIF tipotrans = 2 THEN -- DEPOSITO
+				IF proc_id_cdd IN(SELECT id_deposito FROM deposito) THEN
+					SELECT id_cliente INTO idc FROM deposito WHERE id_deposito = proc_id_cdd;
+					SELECT saldo_cuenta INTO saldoc FROM cuenta WHERE id_cliente = idc;
+					SELECT monto INTO montoc FROM deposito WHERE id_deposito = proc_id_cdd;
+						SET formatted_fecha = STR_TO_DATE(proc_fecha, '%d/%m/%Y');
+						INSERT INTO TRANSACCION (id_transaccion, fecha, otros_det, id_tipo_transaccion, id_deposito, numero_cuenta) 
+						VALUES (proc_id_transaccion, formatted_fecha, proc_otros_det, proc_id_tipo_transaccion, proc_id_cdd, proc_numero_cuenta);
+						SELECT 'Deposito registrado exitosamente' AS SUCCESS;
+						-- nuevo saldo de la cuenta
+						SET nuevo_saldo = saldoc + montoc;
+						UPDATE cuenta 
+						SET saldo_cuenta = nuevo_saldo
+						WHERE id_cliente = idc;
+				ELSE
+					SELECT 'El id de deposito no existe' AS ERROR;
+				END IF;
+			ELSEIF tipotrans = 3 THEN -- DEBITO
+				IF proc_id_cdd IN(SELECT id_debito FROM debito) THEN
+					SELECT id_cliente INTO idc FROM debito WHERE id_debito = proc_id_cdd;
+					SELECT saldo_cuenta INTO saldoc FROM cuenta WHERE id_cliente = idc;
+					SELECT monto INTO montod FROM debito WHERE id_debito = proc_id_cdd;
+					IF saldoc > montod THEN
+						SET formatted_fecha = STR_TO_DATE(proc_fecha, '%d/%m/%Y');
+						INSERT INTO TRANSACCION (id_transaccion, fecha, otros_det, id_tipo_transaccion, id_debito, numero_cuenta) 
+						VALUES (proc_id_transaccion, formatted_fecha, proc_otros_det, proc_id_tipo_transaccion, proc_id_cdd, proc_numero_cuenta);
+						SELECT 'Debito registrado exitosamente' AS SUCCESS;
+						-- nuevo saldo de la cuenta
+						SET nuevo_saldo = saldoc - montod;
+						UPDATE cuenta 
+						SET saldo_cuenta = nuevo_saldo
+						WHERE id_cliente = idc;
+					ELSE
+						SELECT 'Saldo insuficiente para realizar el debito' AS ERROR;
+					END IF;
+				ELSE
+					SELECT 'El id de debito no existe' AS ERROR;
+				END IF;
+			ELSE
+				SELECT 'El tipo de transacción no ha sido validado' AS ERROR;
+			END IF;
+		ELSE
+			SELECT 'El tipo de transacción no existe' AS ERROR;
+		END IF;
+	ELSE
+		SELECT 'ID de transacción ya existe' as ERROR;
+	END IF;
+END$$
+
+DELIMITER ;
+
+DROP PROCEDURE registrarTipoCliente;
+DROP PROCEDURE registrarTipoCuenta;
+DROP PROCEDURE crearProductoServicio;
+DROP PROCEDURE registrarCliente;
+DROP PROCEDURE registrarCuenta;
+DROP PROCEDURE realizarCompra;
+DROP PROCEDURE realizarDeposito;
+DROP PROCEDURE realizarDebito;
+DROP PROCEDURE registrarTipoTransaccion;
+DROP PROCEDURE asignarTransaccion;
