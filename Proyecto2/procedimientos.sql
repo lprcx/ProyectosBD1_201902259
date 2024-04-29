@@ -136,7 +136,7 @@ CREATE PROCEDURE registrarCliente(
 ) 
 BEGIN
 	DECLARE v_correo      VARCHAR(40);
-    DECLARE v_telefono    INT;
+    DECLARE v_telefono    VARCHAR(12);
     DECLARE nombre_valido BOOLEAN;
     DECLARE apellido_valido BOOLEAN;
     DECLARE correo_valido BOOLEAN;
