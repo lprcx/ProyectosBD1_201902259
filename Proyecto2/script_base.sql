@@ -101,8 +101,8 @@ CREATE TABLE IF NOT EXISTS banco.DEBITO (
 
 CREATE TABLE IF NOT EXISTS banco.TIPO_TRANSACCION (
     codigo_transaccion  INT AUTO_INCREMENT,
-    nombre              VARCHAR(40),
-    descripcion         VARCHAR(200),
+    nombre              VARCHAR(40) NOT NULL,
+    descripcion         VARCHAR(200) NOT NULL,
     PRIMARY KEY (codigo_transaccion)
 );
 
@@ -124,175 +124,13 @@ CREATE TABLE IF NOT EXISTS banco.TRANSACCION (
 );
 
 
-----------funciones------------
-DELIMITER $$
-CREATE FUNCTION soloLetras(str VARCHAR(100))
-RETURNS BOOLEAN DETERMINISTIC
-BEGIN
-RETURN IF (str REGEXP '^[a-zA-Zaáéíóú ]*$',true,false);
-END $$
-DELIMITER ;
-
-select soloLetras("esta es 2 cadena");
-
-DELIMITER $$ 
-
-
-DELIMITER $$
-CREATE FUNCTION validarEmail(email VARCHAR(60))
-RETURNS BOOLEAN DETERMINISTIC
-BEGIN
-RETURN IF 
-(email REGEXP '^[a-zA-Z0-9]+@[a-zA-Z]+(\.[a-zA-Z]+)+$',true,false);
-END $$
-DELIMITER ;
-
----- PROCEDIMIENTOS-----------
-
------ ////registrar tipo de cliente
-DELIMITER $$
-
-CREATE PROCEDURE registrarTipoCliente(
-    IN proc_idtipo INT(10),
-    IN proc_nombre VARCHAR(20),
-    IN proc_descripcion VARCHAR(200),
-    IN new_idtipo INT(10)
-)
-BEGIN
-    DECLARE descripcion_valida INT;
-    SET descripcion_valida = soloLetras(proc_descripcion);
-
-    IF descripcion_valida THEN
-        IF proc_idtipo IS NOT NULL THEN
-            INSERT INTO TIPOCL(id_tipo, nombre, descripcion)
-            VALUES (proc_idtipo, proc_nombre, proc_descripcion)
-        ELSE 
-            SELECT COALESCE(MAX(id_tipo), 0) + 1 INTO new_idtipo FROM TIPOCL;
-            INSERT INTO TIPOCL(id_tipo, nombre, descripcion)
-            VALUES (new_idtipo, proc_nombre, proc_descripcion)
-        END IF;
-    END IF;
-END$$
-
-DELIMITER ;
-
------ almacenar la contraseña encriptada--
-DELIMITER $$
-
-CREATE PROCEDURE almacenarContraseña(
-    IN p_usuario VARCHAR(40),
-    IN p_contraseña VARCHAR(200)
-)
-BEGIN
-    DECLARE hashed_password VARCHAR(64);
-
-    -- Encriptar la contraseña usando SHA-256
-    SET hashed_password = SHA2(p_contraseña, 256);
-
-    -- Insertar el usuario y la contraseña en la tabla de usuarios
-    INSERT INTO usuarios (usuario, contraseña) VALUES (p_usuario, hashed_password);
-END$$
-
-DELIMITER ;
-
-CALL almacenarContraseña('usuario_prueba', 'contraseña_prueba');
-
-
--------- ///// registrarcliente
-DROP PROCEDURE IF EXISTS registrarCliente;
-delimiter $$
-CREATE PROCEDURE registrarCliente(
-    IN    proc_id_cliente INT(10),
-    IN    proc_nombre      VARCHAR(40),
-    IN    proc_apellidos      VARCHAR(40),
-    IN    proc_telefonos      VARCHAR(12),
-    IN    proc_correos     VARCHAR(40),
-    IN    proc_usuario      VARCHAR(40),
-    IN    proc_contraseña      VARCHAR(200),
-    IN    proc_tipo_cliente      INT(10)
-)  
-BEGIN
-    DECLARE v_correo      INT;
-    DECLARE v_telefono    INT;
-    DECLARE nombre_valido BOOLEAN;
-    DECLARE apellido_valido BOOLEAN;
-    DECLARE correo_valido BOOLEAN;
-
-    -- Validar que el nombre solo contenga letras
-    SET nombre_valido = soloLetras(proc_nombre);
-    SET apellido_valido = soloLetras(proc_apellidos);
-    SET correo_valido = validarEmail(proc_correos);
-
-    IF nombre_valido AND apellido_valido THEN
-        IF proc_id_cliente IS NOT NULL THEN
-            IF proc_id_cliente NOT IN(SELECT id_cliente FROM cliente) THEN
-                IF proc_usuario NOT IN(SELECT usuario FROM cliente) THEN
-                    --- eliminar codigo de area
-                    SET proc_telefonos = RIGHT(proc_telefonos, 8); 
-                    INSERT INTO cliente (id_cliente, nombre, apellidos, telefonos, correos, usuario, contraseña, tipo_cliente)
-                    VALUES (proc_id_cliente, proc_nombre, proc_apellidos, proc_telefonos, proc_correos, proc_usuario, proc_contraseña, proc_tipo_cliente);
-                    
-                    -- Insertar correos del cliente
-                    FOR c IN (SELECT trim(regexp_substr(proc_correos, '[^|]+', 1, level)) correo
-                              FROM dual
-                              CONNECT BY regexp_substr(proc_correos, '[^|]+', 1, level) IS NOT NULL)
-                    LOOP
-                        INSERT INTO correo (id_correo, idcliente, correo)
-                        VALUES (correo_seq.NEXTVAL, proc_id_cliente, c.correo);
-                    END LOOP;
-
-                    -- Insertar teléfonos del cliente
-                    FOR t IN (SELECT trim(regexp_substr(proc_telefonos, '[^-|]+', 1, level)) telefono
-                              FROM dual
-                              CONNECT BY regexp_substr(proc_telefonos, '[^-|]+', 1, level) IS NOT NULL)
-                    LOOP
-                        -- Verificar y truncar si el teléfono tiene más de 12 caracteres
-                        IF LENGTH(t.telefono) > 12 THEN
-                            SET t.telefono = SUBSTR(t.telefono, 1, 12);
-                        END IF;
-
-                        -- Insertar el teléfono
-                        INSERT INTO telefono (id_telefono, idcliente, telefono)
-                        VALUES (telefono_seq.NEXTVAL, proc_id_cliente, t.telefono);
-                    END LOOP;
-                ELSE
-                    SELECT 'El nombre de usuario ya existe'
-                END IF;
-            ELSE
-                SELECT 'CLIENTE YA EXISTE' as ERROR;
-            END IF;
-        ELSE:
-            SELECT COALESCE(MAX(id_cliente), 0) + 1 INTO id_cliente FROM cliente;
-            INSERT INTO cliente (id_cliente, nombre, apellidos, telefonos, correos, usuario, contraseña, tipo_cliente)  
-            VALUES (proc_id_cliente, proc_nombre, proc_apellidos, proc_telefonos, proc_correos, proc_usuario, proc_contraseña, proc_tipo_cliente);
-        END IF;
-    END IF;
-END $$
-delimiter;
-
------ ////registrar tipo de cuenta
-DELIMITER $$
-
-CREATE PROCEDURE registrarTipoCuenta(
-    IN proc_codigo INT(10),
-    IN proc_nombre VARCHAR(20),
-    IN proc_descripcion VARCHAR(200)
-)
-BEGIN
-    DECLARE descripcion_valida INT;
-    SET descripcion_valida = soloLetras(proc_descripcion);
-
-    IF descripcion_valida THEN
-        IF proc_codigo IS NOT NULL THEN
-            INSERT INTO TIPOCUENTA(codigo, nombre, descripcion)
-            VALUES (proc_codigo, proc_nombre, proc_descripcion)
-        ELSE 
-            SELECT 'Tipo de cuenta no válida' as ERROR;
-        END IF;
-    END IF;
-END$$
-
-DELIMITER ;
+CREATE TABLE historial_transacciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fecha_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    descripcion VARCHAR(200),
+    tipo ENUM('INSERT', 'UPDATE', 'DELETE'),
+    nombre_tabla_afectada VARCHAR(50)
+);
 
 
 

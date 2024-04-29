@@ -158,8 +158,155 @@ END$$
 
 DELIMITER ;
 
+-- ----------------------------------------------------------------------------------------
+-- // MOVIMIENTOS GENERALES POR FECHAS
+DELIMITER $$
+
+CREATE PROCEDURE consultarMovsGenFech(
+    IN proc_fechaInicio VARCHAR(10),
+    IN proc_fechaFin VARCHAR(10)
+)
+BEGIN
+    -- Validar formato de fecha de inicio
+    IF STR_TO_DATE(proc_fechaInicio, '%d/%m/%Y') IS NULL THEN
+        SELECT 'Formato de fecha de inicio inválido. Use DD/MM/YYYY' AS ERROR;
+    -- Validar formato de fecha de fin
+    ELSEIF STR_TO_DATE(proc_fechaFin, '%d/%m/%Y') IS NULL THEN
+        SELECT 'Formato de fecha de fin inválido. Use DD/MM/YYYY' AS ERROR;
+    ELSE
+        -- Obtener movimientos generales por rango de fechas
+        SELECT 
+            t.id_transaccion AS Id_Transaccion,
+            tt.nombre AS Tipo_Transaccion,
+            CASE
+                WHEN c.id_compra IS NOT NULL THEN 'Compra'
+                WHEN d.id_deposito IS NOT NULL THEN 'Depósito'
+                WHEN deb.id_debito IS NOT NULL THEN 'Débito'
+                ELSE 'Otro'
+            END AS Tipo_Servicio,
+            CONCAT(cli.nombre, ' ', cli.apellidos) AS Nombre_Cliente,
+            t.numero_cuenta AS No_Cuenta,
+            tc.nombre AS Tipo_Cuenta,
+            t.fecha AS Fecha,
+            CASE
+                WHEN c.id_compra IS NOT NULL THEN c.importe
+                WHEN d.id_deposito IS NOT NULL THEN d.monto
+                WHEN deb.id_debito IS NOT NULL THEN deb.monto
+                ELSE NULL
+            END AS Monto,
+            t.otros_det AS Otros_Detalles
+        FROM transaccion t
+        LEFT JOIN tipo_transaccion tt ON t.id_tipo_transaccion = tt.codigo_transaccion
+        LEFT JOIN compra c ON t.id_compra = c.id_compra
+        LEFT JOIN deposito d ON t.id_deposito = d.id_deposito
+        LEFT JOIN debito deb ON t.id_debito = deb.id_debito
+        LEFT JOIN cuenta cu ON t.numero_cuenta = cu.id_cuenta
+        LEFT JOIN tipocuenta tc ON cu.tipo_cuenta = tc.codigo
+        LEFT JOIN cliente cli ON cu.id_cliente = cli.id_cliente
+        WHERE t.fecha BETWEEN STR_TO_DATE(proc_fechaInicio, '%d/%m/%Y') AND STR_TO_DATE(proc_fechaFin, '%d/%m/%Y');
+    END IF;
+END$$
+
+DELIMITER ;
+
+
+-- -------------------------------------------------------------------------
+-- MOVIMIENTOS GENERALES DEL CLIENTE 
+DELIMITER $$
+
+CREATE PROCEDURE consultarMovsFechClien(
+    IN proc_idCliente INT,
+    IN proc_fechaInicio VARCHAR(10),
+    IN proc_fechaFin VARCHAR(10)
+)
+BEGIN
+    DECLARE cliente_existente INT;
+
+    -- Verificar si el cliente existe
+    SELECT COUNT(*) INTO cliente_existente FROM cliente WHERE id_cliente = proc_idCliente;
+
+    IF cliente_existente = 0 THEN
+        SELECT 'El cliente no existe' AS ERROR;
+    ELSE
+        -- Validar formato de fecha de inicio
+        IF STR_TO_DATE(proc_fechaInicio, '%d/%m/%Y') IS NULL THEN
+            SELECT 'Formato de fecha de inicio inválido. Use DD/MM/YYYY' AS ERROR;
+        -- Validar formato de fecha de fin
+        ELSEIF STR_TO_DATE(proc_fechaFin, '%d/%m/%Y') IS NULL THEN
+            SELECT 'Formato de fecha de fin inválido. Use DD/MM/YYYY' AS ERROR;
+        ELSE
+            -- Obtener movimientos por rango de fechas para el cliente específico
+            SELECT 
+                t.id_transaccion AS Id_Transaccion,
+                tt.nombre AS Tipo_Transaccion,
+                CASE
+                    WHEN c.id_compra IS NOT NULL THEN 'Compra'
+                    WHEN d.id_deposito IS NOT NULL THEN 'Depósito'
+                    WHEN deb.id_debito IS NOT NULL THEN 'Débito'
+                    ELSE 'Otro'
+                END AS Tipo_Servicio,
+                CONCAT(cli.nombre, ' ', cli.apellidos) AS Nombre_Cliente,
+                t.numero_cuenta AS No_Cuenta,
+                tc.nombre AS Tipo_Cuenta,
+                t.fecha AS Fecha,
+                CASE
+                    WHEN c.id_compra IS NOT NULL THEN c.importe
+                    WHEN d.id_deposito IS NOT NULL THEN d.monto
+                    WHEN deb.id_debito IS NOT NULL THEN deb.monto
+                    ELSE NULL
+                END AS Monto,
+                t.otros_det AS Otros_Detalles
+            FROM transaccion t
+            LEFT JOIN tipo_transaccion tt ON t.id_tipo_transaccion = tt.codigo_transaccion
+            LEFT JOIN compra c ON t.id_compra = c.id_compra
+            LEFT JOIN deposito d ON t.id_deposito = d.id_deposito
+            LEFT JOIN debito deb ON t.id_debito = deb.id_debito
+            LEFT JOIN cuenta cu ON t.numero_cuenta = cu.id_cuenta
+            LEFT JOIN tipocuenta tc ON cu.tipo_cuenta = tc.codigo
+            LEFT JOIN cliente cli ON cu.id_cliente = cli.id_cliente
+            WHERE cu.id_cliente = proc_idCliente
+            AND t.fecha BETWEEN STR_TO_DATE(proc_fechaInicio, '%d/%m/%Y') AND STR_TO_DATE(proc_fechaFin, '%d/%m/%Y');
+        END IF;
+    END IF;
+END$$
+
+DELIMITER ;
+
+-- ---------------------------------------------------------------------------------
+-- // CONSULTAR DESASIGNACION
+DELIMITER $$
+
+CREATE PROCEDURE consultarDesasignacion()
+BEGIN
+    -- Consultar productos y servicios
+    SELECT
+        codigo AS Codigo,
+        descripcion_ps AS Nombre,
+        CASE
+            WHEN tipo = 1 THEN 'Tipo = 1'
+            WHEN tipo = 2 THEN 'Tipo = 2'
+            ELSE 'Tipo = Otro'
+        END AS Descripcion,
+        CASE
+            WHEN tipo = 1 THEN 'Producto'
+            WHEN tipo = 2 THEN 'Servicio'
+            ELSE 'Otro'
+        END AS Tipo
+    FROM PRODUCTO_SERVICIO;
+END$$
+
+DELIMITER ;
+
+
+
+
+
+
 
 DROP PROCEDURE consultarSaldoCliente;
 DROP PROCEDURE consultarCliente;
 DROP PROCEDURE consultarMovsCliente;
 DROP PROCEDURE consultarTipoCuentas;
+DROP PROCEDURE consultarMovsGenFech;
+DROP PROCEDURE consultarMovsFechClien;
+DROP PROCEDURE consultarDesasignacion;

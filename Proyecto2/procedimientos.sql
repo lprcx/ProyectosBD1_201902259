@@ -308,8 +308,13 @@ IF proc_id_compra NOT IN(SELECT id_compra FROM compra) THEN
 					INSERT INTO COMPRA (id_compra, fecha, importe, otros_det, codigo_ps, id_cliente) 
 					VALUES (proc_id_compra, formatted_fecha, proc_importe, proc_otros_det, proc_codigo_ps, proc_id_cliente);
 					SELECT 'Compra de servicio registrada exitosamente' AS SUCCESS;
+				ELSEIF proc_importe = 0 THEN
+					SET formatted_fecha = STR_TO_DATE(proc_fecha, '%d/%m/%Y');
+					INSERT INTO COMPRA (id_compra, fecha, importe, otros_det, codigo_ps, id_cliente) 
+					VALUES (proc_id_compra, formatted_fecha, producto_costo, proc_otros_det, proc_codigo_ps, proc_id_cliente);
+					SELECT 'Compra de servicio registrada exitosamente' AS SUCCESS;
 				ELSE
-					SELECT 'El importe no coincide con el costo del producto' AS ERROR;
+					SELECT 'Importe incorrecto' AS ERROR;
 				END IF;
 			ELSE
 				IF producto_tipo = 2 THEN
@@ -423,39 +428,6 @@ END$$
 
 DELIMITER ;
 
--- -----------------------------------------------------------------
--- ------ ///// realizar registrarTipoTransaccion
-DELIMITER $$
-CREATE PROCEDURE registrarTipoTransaccion(
-    IN  proc_codigo_transaccion 	INT,
-    IN 	proc_nombre 		VARCHAR(40),
-    IN	proc_descripcion  VARCHAR(200)
-) 
-BEGIN
-    
-IF proc_codigo_transaccion NOT IN(SELECT id_deposito FROM deposito) THEN
-	IF iddebito_valido THEN
-		IF proc_id_cliente IN(SELECT id_cliente FROM cliente) THEN
-			IF proc_monto > 0 THEN
-				SET formatted_fecha = STR_TO_DATE(proc_fecha, '%d/%m/%Y');
-				INSERT INTO DEPOSITO (id_deposito, fecha, monto, otros_detalles, id_cliente) 
-				VALUES (proc_id_deposito, formatted_fecha, proc_monto, proc_otros_det, proc_id_cliente);
-				SELECT 'Deposito registrado exitosamente' AS SUCCESS;
-			ELSE
-				SELECT 'Debe ingresar un importe mayor a cero' AS ERROR;
-            END IF;
-		ELSE
-			SELECT 'El cliente no existe' AS ERROR;
-		END IF;
-	ELSE
-		SELECT 'Ingrese un tipo de dato entero' as ERROR;
-	END IF;
-ELSE
-	SELECT 'ID de deposito ya existe' as ERROR;
-END IF;
-END$$
-
-DELIMITER ;
 
 
 -- -----------------------------------------------------------------
